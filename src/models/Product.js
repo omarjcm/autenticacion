@@ -6,8 +6,7 @@ const productSchema = new Schema({
     price: Number,
     imgURL: String
 }, {
-    timestamps: true,
-    versionKey: false
+    timestamps: true
 })
 
 export default model('Product', productSchema)
