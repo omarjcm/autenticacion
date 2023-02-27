@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import bcrypt from 'bycryptjs'
+import bcrypt from "bcryptjs"
 
 const userSchema = new mongoose.Schema({
     username: { type: String, unique: true },
@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 })
 
-userSchema.statics.encrypted_passord = async (password) => {
+userSchema.statics.encrypted_password = async (password) => {
     const salt = await bcrypt.genSalt(10)
     return await bcrypt.hash(password, salt)
 }
