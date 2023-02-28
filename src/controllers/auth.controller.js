@@ -11,6 +11,14 @@ export const signUp = async (req, res) => {
         password: await User.encrypted_password(password)
     })
 
+    if (roles) {
+        const found_roles = await Role.find({name: {$in: roles}})
+        newUser.roles = found_roles.map( role => role._id )
+    } else {
+        const role = await Role.find({name: 'user'})
+        newUser.roles = [role._id]
+    }
+
     const savedUser = await newUser.save()
 
     const token = jwt.sign({id:savedUser._id}, SECRET, {

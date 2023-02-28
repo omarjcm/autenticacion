@@ -2,11 +2,14 @@ import express from 'express'
 import morgan from 'morgan'
 import pkg from '../package.json'
 
+import { create_roles } from './libs/initialSetup'
+
 import productsRoutes from './routes/products.routes'
 //import userRoutes from './routes/user.routes'
 import authRoutes from './routes/auth.routes'
 
 const app = express()
+create_roles()
 
 app.set('pkg', pkg)
 
