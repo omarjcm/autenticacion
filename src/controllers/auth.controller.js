@@ -6,7 +6,11 @@ import config from "../config"
 export const signUp = async (req, res) => {
     try {
         const {username, email, password, roles} = req.body
-        const new_user = new User({ username, email, password })
+        const new_user = new User({ 
+            username, 
+            email, 
+            password: User.encrypted_password(password) 
+        })
         if (roles) {
             const found_roles = await Role.find({name: {$in: roles}})
             new_user.roles = found_roles.map( role => role._id )

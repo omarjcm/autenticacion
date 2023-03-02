@@ -20,15 +20,4 @@ userSchema.statics.compare_password = (password, received_password) => {
     return bcryptjs.compareSync(password, received_password)
 }
 
-userSchema.pre('save', function(next) {
-    const user = this
-    if (!user.isModified('password')) {
-        return next()
-    }
-    const salt = bcryptjs.genSaltSync()
-    const hash = bcryptjs.hashSync(user.password, salt)
-    user.password = hash
-    next()
-})
-
 export default mongoose.model('User', userSchema)
