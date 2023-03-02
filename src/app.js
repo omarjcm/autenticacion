@@ -9,11 +9,12 @@ import productsRoutes from './routes/products.routes'
 import authRoutes from './routes/auth.routes'
 
 const app = express()
-create_roles()
+//create_roles()
 
 app.set('pkg', pkg)
 
 app.use(morgan('dev'))
+app.set("json spaces", 4);
 
 app.get('/', (req, res) => {
     res.json({
