@@ -1,6 +1,6 @@
 import app from './app'
+import config from "./config"
 import './database'
 
-let puerto = 3000
-app.listen(puerto)
-console.log('Server listen on port ', puerto)
+app.listen(config.PORT)
+console.log('Server listen on port ', config.PORT)
