@@ -4,6 +4,7 @@
 
 Se hace el uso de las funciones:
 
+```javascript
 userSchema.statics.encrypted_password = (password) => {
     const salt = bcryptjs.genSaltSync()
     return bcryptjs.hashSync(password, salt)
@@ -12,9 +13,11 @@ userSchema.statics.encrypted_password = (password) => {
 userSchema.statics.compare_password = (password, received_password) => {
     return bcryptjs.compareSync(password, received_password)
 }
+```
 
 Que permiten encriptar el password y luego comparar la clave ingresada en el formulario con la clave encriptada en la base de datos.
 
+```javascript
 export const signUp = async (req, res) => {
     try {
         const {username, email, password, roles} = req.body
@@ -40,11 +43,13 @@ export const signUp = async (req, res) => {
         return res.status(500).json({token: null, message: 'Internal server error'});
     }
 }
+```
 
 ## Autorización
 
 En cambio, para que se pueda ingresar a alguna funcionalidad se debe utilizar los routeos de la siguiente manera:
 
+```javascript
 import { Router } from "express"
 const router = Router()
 
@@ -58,5 +63,6 @@ router.put('/:productId', [auth_jwt.verify_token, auth_jwt.is_admin], productCtr
 router.delete('/:productId', [auth_jwt.verify_token, auth_jwt.is_admin], productCtrl.deleteProductById)
 
 export default router
+```
 
 Dependiendo, del rol que se tenga, se tiene acceso a la funcionalidad correspondiente.
